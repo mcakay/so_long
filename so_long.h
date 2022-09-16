@@ -6,7 +6,7 @@
 /*   By: mcakay <mcakay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 01:46:38 by mcakay            #+#    #+#             */
-/*   Updated: 2022/09/16 03:45:37 by mcakay           ###   ########.fr       */
+/*   Updated: 2022/09/16 16:03:50 by mcakay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,27 @@ typedef struct s_map
 	void	*player;
 	void	*collect;
 }				t_map;
+
+typedef struct s_player
+{
+	void	*stand;
+	void	*front_1;
+	void	*front_2;
+	void	*front_3;
+	void	*front_4;
+	void	*left_1;
+	void	*left_2;
+	void	*left_3;
+	void	*left_4;
+	void	*right_1;
+	void	*right_2;
+	void	*right_3;
+	void	*right_4;
+	void	*back_1;
+	void	*back_2;
+	void	*back_3;
+	void	*back_4;
+}				t_player;
 
 //data
 void	ft_init_data(t_data *data, char *path);
