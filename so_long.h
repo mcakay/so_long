@@ -6,7 +6,7 @@
 /*   By: mcakay <mcakay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 01:46:38 by mcakay            #+#    #+#             */
-/*   Updated: 2022/09/16 16:03:50 by mcakay           ###   ########.fr       */
+/*   Updated: 2022/09/18 03:05:49 by mcakay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,6 @@
 # include "./gnl/get_next_line.h"
 # include "./minilibx/mlx.h"
 # include <fcntl.h>
-
-typedef struct s_data
-{
-	void	*mlx;
-	void	*win;
-	char	**map;
-	int		map_width;
-	int		map_heigth;
-	int		x;
-	int		y;
-}				t_data;
-
-typedef struct s_map
-{
-	void	*floor;
-	void	*wall;
-	void	*player;
-	void	*collect;
-}				t_map;
 
 typedef struct s_player
 {
@@ -56,7 +37,37 @@ typedef struct s_player
 	void	*back_2;
 	void	*back_3;
 	void	*back_4;
+	int		x;
+	int		y;
 }				t_player;
+
+typedef struct s_collect
+{
+	void	*img;
+	int		total;
+	int		**collects;
+	int		collected;
+}				t_collect;
+
+typedef struct s_data
+{
+	void	*mlx;
+	void	*win;
+	char	**map;
+	int		map_width;
+	int		map_heigth;
+	int		x;
+	int		y;
+	t_player	player;
+	t_collect	collect;
+}				t_data;
+
+typedef struct s_map
+{
+	void	*floor;
+	void	*wall;
+	void	*exit;
+}				t_map;
 
 //data
 void	ft_init_data(t_data *data, char *path);
@@ -68,5 +79,21 @@ void	ft_put_map(t_data *data);
 
 //window
 void ft_get_window(t_data *data);
+
+//player
+void	ft_init_player(t_data *data, t_player *player);
+void	ft_put_player(t_data *data, t_player *player);
+
+//move
+int		ft_move(int keycode, t_data *data);
+
+//utils
+void	ft_clear_window(t_data *data);
+void	ft_check_collects(t_data *data, int x, int y);
+void	ft_sleep(long long int time);
+
+//collect
+void	ft_init_collect(t_data *data, t_collect *collect);
+void	ft_put_collect(t_data *data, t_collect *collect);
 
 #endif

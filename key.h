@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   key.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcakay <mcakay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 01:46:23 by mcakay            #+#    #+#             */
-/*   Updated: 2022/09/17 23:19:03 by mcakay           ###   ########.fr       */
+/*   Created: 2022/09/16 19:24:38 by mcakay            #+#    #+#             */
+/*   Updated: 2022/09/16 19:26:50 by mcakay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#ifndef KEY_H
+# define KEY_H
 
-int	main(int argc, char **argv)
-{
-	t_data	data;
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_ESC 53
 
-	data.mlx = mlx_init();
-	if (argc != 2)
-		return (1);
-	ft_init_data(&data, argv[1]);
-	mlx_loop(data.mlx);
-	return (0);
-}
+#endif
