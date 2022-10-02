@@ -6,7 +6,7 @@
 /*   By: mcakay <mcakay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:11:26 by mcakay            #+#    #+#             */
-/*   Updated: 2022/09/18 03:06:04 by mcakay           ###   ########.fr       */
+/*   Updated: 2022/09/19 07:52:57 by mcakay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_collects(t_data *data, t_collect *collect)
 			{
 				collect->collects[k][0] = i;
 				collect->collects[k][1] = j;
-				k++; 
+				k++;
 			}
 			j++;
 		}
@@ -66,12 +66,11 @@ void	ft_put_collect(t_data *data, t_collect *collect)
 		if (collect->collects[i][2] != 0)
 		{
 			mlx_put_image_to_window(data->mlx, data->win, collect->img,
-			collect->collects[i][1]*64, collect->collects[i][0]*64);
+				collect->collects[i][1] * 64, collect->collects[i][0] * 64);
 		}
 		i++;
 	}
 }
-
 
 void	ft_init_collect(t_data *data, t_collect *collect)
 {
@@ -91,6 +90,25 @@ void	ft_init_collect(t_data *data, t_collect *collect)
 		i++;
 	}
 	ft_collects(data, collect);
-	collect->img = mlx_xpm_file_to_image(data->mlx, "./srcs/collect.xpm", &a, &a);
+	collect->img = mlx_xpm_file_to_image(data->mlx,
+			"./srcs/collect.xpm", &a, &a);
 	ft_put_collect(data, collect);
+}
+
+void	ft_check_collects(t_data *data, int x, int y)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->collect.total)
+	{
+		if (data->collect.collects[i][0] == x
+			&& data->collect.collects[i][1] == y
+			&& data->collect.collects[i][2] != 0)
+		{
+			data->collect.collected++;
+			data->collect.collects[i][2] = 0;
+		}
+		i++;
+	}
 }

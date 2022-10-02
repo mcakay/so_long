@@ -6,11 +6,18 @@
 /*   By: mcakay <mcakay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 02:06:53 by mcakay            #+#    #+#             */
-/*   Updated: 2022/09/17 08:23:36 by mcakay           ###   ########.fr       */
+/*   Updated: 2022/09/19 07:26:40 by mcakay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	ft_check_walls(t_data *data)
+{
+	if (data->y == 0 || data->y == data->map_heigth - 1
+		|| data->x == 0 || data->x == data->map_width - 1)
+		ft_error();
+}
 
 void	ft_calculate_map_size(t_data *data, char *path)
 {
@@ -35,6 +42,7 @@ void	ft_get_map(t_data *data, char *path)
 	int		fd;
 	int		i;
 
+	data->path = path;
 	data->map = malloc(sizeof(char *) * data->map_heigth);
 	fd = open(path, O_RDONLY);
 	i = 0;
@@ -66,11 +74,17 @@ void	ft_put_map(t_data *data)
 		while (data->x < data->map_width)
 		{
 			if (data->map[data->y][data->x] == '1')
-				mlx_put_image_to_window(data->mlx, data->win, map.wall, data->x*64, data->y*64);
+				mlx_put_image_to_window(data->mlx,
+					data->win, map.wall, data->x * 64, data->y * 64);
 			else
-				mlx_put_image_to_window(data->mlx, data->win, map.floor, data->x*64, data->y*64);
+			{
+				ft_check_walls(data);
+				mlx_put_image_to_window(data->mlx, data->win,
+					map.floor, data->x * 64, data->y * 64);
+			}
 			if (data->map[data->y][data->x] == 'E')
-				mlx_put_image_to_window(data->mlx, data->win, map.exit, data->x*64, data->y*64);
+				mlx_put_image_to_window(data->mlx,
+					data->win, map.exit, data->x * 64, data->y * 64);
 			data->x++;
 		}
 		data->y++;

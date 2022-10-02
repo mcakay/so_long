@@ -6,7 +6,7 @@
 /*   By: mcakay <mcakay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 01:46:38 by mcakay            #+#    #+#             */
-/*   Updated: 2022/09/18 03:05:49 by mcakay           ###   ########.fr       */
+/*   Updated: 2022/09/19 08:19:09 by mcakay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,12 @@ typedef struct s_player
 {
 	void	*stand;
 	void	*front_1;
-	void	*front_2;
-	void	*front_3;
-	void	*front_4;
 	void	*left_1;
-	void	*left_2;
-	void	*left_3;
-	void	*left_4;
 	void	*right_1;
-	void	*right_2;
-	void	*right_3;
-	void	*right_4;
 	void	*back_1;
-	void	*back_2;
-	void	*back_3;
-	void	*back_4;
 	int		x;
 	int		y;
+	int		count;
 }				t_player;
 
 typedef struct s_collect
@@ -51,13 +40,14 @@ typedef struct s_collect
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*win;
-	char	**map;
-	int		map_width;
-	int		map_heigth;
-	int		x;
-	int		y;
+	void		*mlx;
+	void		*win;
+	char		**map;
+	char		*path;
+	int			map_width;
+	int			map_heigth;
+	int			x;
+	int			y;
 	t_player	player;
 	t_collect	collect;
 }				t_data;
@@ -69,31 +59,38 @@ typedef struct s_map
 	void	*exit;
 }				t_map;
 
-//data
-void	ft_init_data(t_data *data, char *path);
+typedef struct s_check
+{
+	int	c_len;
+	int	p_len;
+	int	e_len;
+	int	i;
+	int	j;
+	int	temp;
+}				t_check;
 
-//map
+void	ft_init_data(t_data *data, char *path);
 void	ft_calculate_map_size(t_data *data, char *path);
 void	ft_get_map(t_data *data, char *path);
 void	ft_put_map(t_data *data);
-
-//window
-void ft_get_window(t_data *data);
-
-//player
+void	ft_check_map(t_data *data);
+void	ft_get_window(t_data *data);
+void	ft_clear_window(t_data *data);
 void	ft_init_player(t_data *data, t_player *player);
 void	ft_put_player(t_data *data, t_player *player);
-
-//move
 int		ft_move(int keycode, t_data *data);
-
-//utils
-void	ft_clear_window(t_data *data);
-void	ft_check_collects(t_data *data, int x, int y);
-void	ft_sleep(long long int time);
-
-//collect
+void	ft_move_count(t_data *data);
+void	ft_error(void);
+void	ft_display_move(t_data *data);
+void	ft_free(t_data *data, char **strs);
+void	ft_display_and_put(t_data *data, void *img);
 void	ft_init_collect(t_data *data, t_collect *collect);
 void	ft_put_collect(t_data *data, t_collect *collect);
+void	ft_check_collects(t_data *data, int x, int y);
+void	ft_valid_path(t_data *data, t_player *player);
+void	ft_x(char **strs, int y, int x);
+void	ft_find_player(t_data *data, t_player *player);
+void	ft_find_x(t_data *data, char **strs);
+void	ft_find_e(t_data *data, char **strs);
 
 #endif

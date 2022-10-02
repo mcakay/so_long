@@ -24,18 +24,17 @@ all: $(NAME)
 
 
 $(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
-
+	@ar rc $(NAME) $(OBJS)
 
 clean:
-	$(RM) $(OBJS) $(BONUS_OBJS)
+	@$(RM) $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 
 bonus: $(OBJS) $(BONUS_OBJS)
-	ar rc $(NAME) $(OBJS) $(BONUS_OBJS)
+	@ar rc $(NAME) $(OBJS) $(BONUS_OBJS)
 
 .PHONY: all clean fclean re bonus

@@ -4,7 +4,7 @@ LFLAGS = -framework AppKit -framework OpenGL -L./minilibx -lmlx
 MLX = ./minilibx/libmlx.a
 LIBFT =	ft_printf/libftprintf.a
 GNL_SRCS = ./gnl/get_next_line.c  ./gnl/get_next_line_utils.c
-SRCS = main.c data.c map.c window.c player.c move.c utils.c collect.c
+SRCS = main.c data.c map.c window.c player.c move.c utils.c collect.c check_map.c valid_path.c find.c
 
 all : $(MLX) $(NAME)
 

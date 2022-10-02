@@ -23,22 +23,22 @@ CFLAGS= -Wall -Werror -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	make bonus -C ./libft
-	cp libft/libft.a $(NAME)
-	ar rc $(NAME) $(OBJS)
+	@make bonus -C ./libft
+	@cp libft/libft.a $(NAME)
+	@ar rc $(NAME) $(OBJS)
 
 clean:
-	$(RM) $(OBJS) $(BONUS_OBJS)
-	make fclean -C ./libft
+	@$(RM) $(OBJS) $(BONUS_OBJS)
+	@make fclean -C ./libft
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 
 bonus: $(BONUS_OBJS)
-	make bonus -C ./libft
-	cp libft/libft.a $(NAME)
-	ar rc $(NAME) $(BONUS_OBJS)
+	@make bonus -C ./libft
+	@cp libft/libft.a $(NAME)
+	@ar rc $(NAME) $(BONUS_OBJS)
 
 .PHONY: all clean fclean re bonus
